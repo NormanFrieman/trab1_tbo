@@ -1,6 +1,6 @@
 
 
 all:
-	gcc -Wall -g -o main Main_Compactador.c Sources_Compactador/*.c -lm
+	gcc -Wall -g -o main Main.c Sources/*.c -lm
 clean:
 	rm -f main
