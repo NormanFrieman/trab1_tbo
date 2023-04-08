@@ -9,7 +9,12 @@
 
 typedef struct ponto Ponto;
 
+int Retorna_Tamanho_Cord(Ponto* P);
+int Retorna_Numero_Dista(Ponto* P);
 Ponto* Inicia(int N);
+void Inicia_Unico(Ponto* P, char* N, int* D);
+void Inicia_Distacias(Ponto* P, int D);
+Ponto* Realloca(Ponto* P, int* N);
 void Prenche(Ponto* P, int N);
 
 
