@@ -19,11 +19,12 @@ Ponto* Inicia(int N);
 void Inicia_Unico(Ponto* P, char* N, int* D, int Di);
 void Adiciona_Distancias(Ponto* P, char* Nome, float N);
 float Calcula(Ponto* P1, Ponto* P2, int D);
+void Modifica_Tamanho(Ponto* P, int N);
 Ponto* Realloca(Ponto* P, int* N);
 void Imprime_Unico(Ponto* P, int D, int N);
 void Imprime(Ponto* P, int N, int D);
 void Imprime_Cordenadas(Ponto* P, int D);
-void Prenche(Ponto* P, int N);
+void Prenche(Ponto* P, int N, int D);
 
 
 

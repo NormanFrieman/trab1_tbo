@@ -18,13 +18,14 @@ void Ler(char* Arquivo, Ponto* P){
     int Dimensao = -1;
     int Contagem = 0;
     int Contagem_Cord;
-    int Tamanho = 100;
+    int Tamanho = 10;
     char* Nome;
     int* Coordenadas;
     char* tok;
     P = (Ponto*)malloc(Tamanho*sizeof(Ponto));
     while(getline(&Linha, &T, Entrada) != -1){
         if(Contagem == Tamanho){
+            printf("%d\n",Tamanho);
             P = Realloca(P, &Tamanho);
         }
         if(Dimensao == -1){
@@ -47,25 +48,9 @@ void Ler(char* Arquivo, Ponto* P){
         //printf("%d",Contagem);
         Contagem++;
     }
-    for(int i = 0; i < Contagem; i++){
-        Imprime_Unico(&P[i], Dimensao, 0);
-    }
-    float Distancia;
-    for(int i = 0; i < Contagem; i++){
-        for(int k = i + 1; k < Contagem; k++){
-            if(Retorna_Numero_Dista(&P[i]) == Retorna_Tamanho_Cord(&P[i])){
-                Realloca_Distancia(Retorna_Distancia(&P[i]), Contagem);
-            }
-            if(Retorna_Numero_Dista(&P[k]) == Retorna_Tamanho_Cord(&P[k])){
-                Realloca_Distancia(Retorna_Distancia(&P[k]), Contagem);
-            }
-            Distancia = Calcula(&P[i], &P[k], Dimensao);
-            Adiciona_Distancias(&P[i], Retorna_Nome(&P[k]), Distancia);
-            Adiciona_Distancias(&P[k], Retorna_Nome(&P[i]), Distancia);
-        }
-    }
-    for(int i = 0; i < Contagem; i++){
-        //Imprime_Unico(&P[i], Dimensao, 0);
+    Prenche(P, Contagem, Dimensao);
+    for(int i = 0; i < 5; i++){
+        //Imprime_Unico(&P[i], Dimensao, Contagem);
     }
     fclose(Entrada);
     free(Linha);

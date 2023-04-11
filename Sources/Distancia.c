@@ -23,11 +23,13 @@ float Calcula_Distancia(int* P1, int* P2, int D){
     for(int i = 0; i < D; i++){
         Soma += (pow(P1[i],2) + pow(P2[i],2));
     }
+    printf("%.2f\n",sqrt(Soma));
     return sqrt(Soma);
 }
 
 void Imprime_Distancias(Distancia* D, int N){
     for(int i = 0; i < N; i++){
-       printf("Nome: %s -> Distancia: %.2f ", D[i].Nome_Ponto, D[i].Distancia); 
+       printf("Nome: %s -> Distancia: %.2f \n", D[i].Nome_Ponto, D[i].Distancia); 
     }
+    printf("\n");
 }
