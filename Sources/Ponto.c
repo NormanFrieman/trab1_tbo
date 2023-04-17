@@ -24,11 +24,9 @@ Ponto* Inicia(int N){
 
 void Inicia_Unico(Ponto* P, char* N, int* D, int Di){
     P->Nome = strdup(N);
-    //printf("Nome: %s\n",P->Nome);
     P->Coordenadas = (int*)malloc(Di*sizeof(int));
     for(int i = 0; i < Di; i++){
         P->Coordenadas[i] = D[i];
-        //printf("%d - %d ",P->Coordenadas[i], D[i]);
     }
     P->Tamanho_Cord = 10;
     P->Numero_Dista = 0;
@@ -48,7 +46,6 @@ void Modifica_Tamanho(Ponto* P, int N){
 }
 
 void Adiciona_Distancias(Ponto* P, char* Nome, float N){
-    //printf("T1 - %d\n", P->Numero_Dista);
     Adiciona_Distancia(&P->Distancias[P->Numero_Dista],Nome, N);
     P->Numero_Dista++;
 }
@@ -92,13 +89,23 @@ void Prenche(Ponto* P, int N, int D){
                 P[k].Distancias = Realloca_Distancia(P[k].Distancias, N);
                 P[k].Tamanho_Cord = N;
             }
-            printf("T1 - %d () %d\n", P[i].Numero_Dista, P[k].Numero_Dista);
             Distancia = Calcula_Distancia(P[i].Coordenadas, P[k].Coordenadas, D);
             Adiciona_Distancia(&P[i].Distancias[P[i].Numero_Dista], P[k].Nome, Distancia);
             Adiciona_Distancia(&P[k].Distancias[P[k].Numero_Dista], P[i].Nome, Distancia);
             P[i].Numero_Dista++;
             P[k].Numero_Dista++;
         }
-        Imprime_Unico(&P[i], D, N);
     }
+    for(int i = 0; i < N; i++){
+        Organiza_Distancia(P[i].Distancias, N);
+    }
+}
+
+void Libera_Ponto(Ponto* P, int N){
+    for(int i = 0; i < N; i++){
+        free(P[i].Nome);
+        free(P[i].Coordenadas);
+        Libera_Distancia(P[i].Distancias, P[i].Numero_Dista);
+    }
+    free(P);
 }

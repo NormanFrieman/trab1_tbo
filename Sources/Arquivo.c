@@ -7,6 +7,7 @@ int Contar_Dimemsao(char* Linha){
     for (tok = strtok(Linha, ","); tok && *tok; tok = strtok(NULL, ",\n")){
         Contagem++;
     }
+    free(Linha);
     return Contagem - 1;
 }
 
@@ -39,20 +40,21 @@ void Ler(char* Arquivo, Ponto* P){
                 Contagem_Cord++;
             }else{
                 Coordenadas[Contagem_Cord - 1] = atoi(tok);
-                //printf("%d - %d - %d\n",Contagem_Cord - 1 ,atoi(tok), Coordenadas[Contagem_Cord - 1]);
                 Contagem_Cord++;
             }
         }
         Inicia_Unico(&P[Contagem], Nome, Coordenadas, Dimensao);
-        //Imprime_Unico(&P[Contagem], Dimensao, 0);
-        //printf("%d",Contagem);
+        free(Nome);
         Contagem++;
     }
     Prenche(P, Contagem, Dimensao);
-    for(int i = 0; i < 5; i++){
+    for(int i = 0; i < Contagem; i++){
         //Imprime_Unico(&P[i], Dimensao, Contagem);
     }
+    Libera_Ponto(P, Contagem);
     fclose(Entrada);
+    free(tok);
+    free(Coordenadas);
     free(Linha);
 }
 

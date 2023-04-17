@@ -25,6 +25,7 @@ void Imprime_Unico(Ponto* P, int D, int N);
 void Imprime(Ponto* P, int N, int D);
 void Imprime_Cordenadas(Ponto* P, int D);
 void Prenche(Ponto* P, int N, int D);
+void Libera_Ponto(Ponto* P, int N);
 
 
 

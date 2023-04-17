@@ -16,7 +16,10 @@ Distancia* Realloca_Distancia(Distancia* D, int N);
 Distancia* Inicia_Distacias(int N);
 void Adiciona_Distancia(Distancia* D, char* Nome, float N);
 float Calcula_Distancia(int* P1, int* P2, int D);
+int Compara_Distancia(const void* V1, const void* V2);
+void Organiza_Distancia(Distancia* D, int N);
 void Imprime_Distancias(Distancia* D, int N);
+void Libera_Distancia(Distancia* D, int N);
 
 
 
