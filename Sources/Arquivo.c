@@ -1,63 +1,78 @@
 #include "../Headers/Arquivo.h"
 
-
-int Contar_Dimemsao(char* Linha){
+int Contar_Dimemsao(char* Linha) {
     char* tok;
     int Contagem = 0;
-    for (tok = strtok(Linha, ","); tok && *tok; tok = strtok(NULL, ",\n")){
+
+    for (tok = strtok(Linha, ","); tok && *tok; tok = strtok(NULL, ",\n")) {
         Contagem++;
     }
+    
     free(Linha);
     return Contagem - 1;
 }
 
-void Ler(char* Arquivo, Ponto* P){
-    FILE* Entrada = fopen(Arquivo, "r");
+Entrada* Ler(char* Arquivo) {
+    FILE* input = fopen(Arquivo, "r");
+
     char* Linha;
     size_t T = 256;
-    Linha = (char*)malloc(T*sizeof(char));
+
+    Linha = (char*)malloc(T * sizeof(char));
+    
     int Dimensao = -1;
+    int DistQuant = 0;
+    int DistQuantOld = 0;
     int Contagem = 0;
-    int Contagem_Cord;
-    int Tamanho = 10;
     char* Nome;
     int* Coordenadas;
     char* tok;
-    P = (Ponto*)malloc(Tamanho*sizeof(Ponto));
-    while(getline(&Linha, &T, Entrada) != -1){
-        if(Contagem == Tamanho){
-            printf("%d\n",Tamanho);
-            P = Realloca(P, &Tamanho);
-        }
-        if(Dimensao == -1){
+    
+    Ponto* P = Inicia_Ponto(1);
+    Distancia* D = Inicia_Distacias(1);
+    
+    while (getline(&Linha, &T, input) != -1) {
+        if (Dimensao == -1) {
             Dimensao = Contar_Dimemsao(strdup(Linha));
-            Coordenadas = (int*)malloc(Dimensao*sizeof(int));
         }
-        Contagem_Cord = 0;
-        for(tok = strtok(Linha, ","); tok && *tok; tok = strtok(NULL, ",\n")){
-            if(Contagem_Cord == 0){
+        Coordenadas = (int*)malloc(Dimensao * sizeof(int));
+
+        int i;
+        for(tok = strtok(Linha, ","), i = 0; tok && *tok; tok = strtok(NULL, ",\n"), i++) {
+            if (i == 0) {
                 Nome = strdup(tok);
-                Contagem_Cord++;
-            }else{
-                Coordenadas[Contagem_Cord - 1] = atoi(tok);
-                Contagem_Cord++;
+            } else {
+                Coordenadas[i-1] = atoi(tok);
             }
         }
+        
         Inicia_Unico(&P[Contagem], Nome, Coordenadas, Dimensao);
         free(Nome);
+
+        if (Contagem > 0) {
+            for (int j = 0; j < Contagem; j++, DistQuantOld++) {
+                Adiciona_Distancia(&D[DistQuantOld], P, j, Contagem);
+            }
+        }
+
         Contagem++;
+
+        // Soma-se +1 na variável Contagem pois o número de pontos é igual ao número de linhas do arquivo + 1
+        DistQuant = (((Contagem+1) * ((Contagem+1) - 1))/ 2) + 1;
+
+        P = Realloca_Ponto(P, Contagem + 1);
+        D = Realloca_Distancia(D, DistQuant + 1);
     }
-    Prenche(P, Contagem, Dimensao);
-    for(int i = 0; i < Contagem; i++){
-        //Imprime_Unico(&P[i], Dimensao, Contagem);
-    }
-    Libera_Ponto(P, Contagem);
-    fclose(Entrada);
+    
+    Entrada* info = (Entrada*)malloc(sizeof(Entrada));
+    info->Dimensao = Dimensao;
+    info->Contagem = Contagem;
+    info->P = P;
+    info->D = D;
+
+    fclose(input);
     free(tok);
-    free(Coordenadas);
     free(Linha);
-}
 
-void Imprimir(Ponto* P){
-
+    return info;
 }
