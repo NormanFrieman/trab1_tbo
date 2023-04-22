@@ -46,7 +46,7 @@ Entrada* Ler(char* Arquivo) {
             }
         }
         
-        Inicia_Unico(&P[Contagem], Nome, Coordenadas, Dimensao);
+        Inicia_Unico(&P[Contagem], Nome, Coordenadas, Dimensao, Contagem);
         free(Nome);
 
         if (Contagem > 0) {
@@ -76,3 +76,4 @@ Entrada* Ler(char* Arquivo) {
 
     return info;
 }
+

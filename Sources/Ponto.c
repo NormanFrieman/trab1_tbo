@@ -16,7 +16,8 @@ Ponto* Inicia_Ponto(int N) {
     return P;
 }
 
-void Inicia_Unico(Ponto* P, char* Nome, int* Coordenadas, int Dimensao) {
+void Inicia_Unico(Ponto* P, char* Nome, int* Coordenadas, int Dimensao, int ID) {
+    P->ID = ID;
     P->Nome = strdup(Nome);
     P->Coordenadas = Coordenadas;
     P->Tamanho_Cord = Dimensao;
@@ -45,6 +46,36 @@ void Imprime_Unico(Ponto* P, int Dimensao) {
         printf(" %d", P->Coordenadas[i]);
     }
     printf("\n");
+}
+
+void Connecta(Ponto* P1, Ponto* P2){
+    if(P1->ID != P2->ID){
+        P2->ID = P1->ID;
+    }
+}
+
+int Compara_Index(const void* V1, const void* V2){
+    Ponto* P1 = V1;
+    Ponto* P2 = V2;
+    return V1->ID - V2->ID;
+}
+
+void Organiza_Index(Ponto* P, int Contagem){
+    qsort(P, Contagem, sizeof(Ponto), Compara_Index);
+}
+
+void Imprime(char Arquivo, Ponto* P, int Contagem){
+    FILE* Saida = fopen(Arquivo, "w");
+    Organiza_Index(P, Contagem);
+    for(int i = 0; i < Contagem; i++){
+        if(P[i+1] != NULL){
+            if(P[i].ID != P[i+1].ID){
+                fprintf(Saida,"%s","\n");
+            }
+        }
+        fprintf(Saida,"%s ",P[i].Nome);
+    }
+    fclose(Saida);
 }
 
 void Libera_Ponto(Ponto* P, int Contagem) {

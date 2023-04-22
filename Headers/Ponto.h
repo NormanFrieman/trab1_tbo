@@ -2,6 +2,7 @@
 #define PONTO_H_
 
 typedef struct {
+    int ID;
     char* Nome;
     int* Coordenadas;
     int Tamanho_Cord;
@@ -22,6 +23,8 @@ Ponto* Realloca_Ponto(Ponto* P, int N);
 void Imprime_Pontos(Ponto* P, int Contagem, int Dimensao);
 
 void Imprime_Unico(Ponto* P, int Dimensao);
+
+void Connecta(Ponto* P1, Ponto* P2);
 
 void Libera_Ponto(Ponto* P, int Contagem);
 
