@@ -14,7 +14,7 @@ int Retorna_Tamanho_Cord(Ponto* P);
 
 Ponto* Inicia_Ponto(int N);
 
-void Inicia_Unico(Ponto* P, char* Nome, int* Coordenadas, int Dimensao);
+void Inicia_Unico(Ponto* P, char* Nome, int* Coordenadas, int Dimensao, int ID);
 
 void Modifica_Tamanho(Ponto* P, int N);
 

@@ -55,20 +55,20 @@ void Connecta(Ponto* P1, Ponto* P2){
 }
 
 int Compara_Index(const void* V1, const void* V2){
-    Ponto* P1 = V1;
-    Ponto* P2 = V2;
-    return V1->ID - V2->ID;
+    const Ponto* P1 = V1;
+    const Ponto* P2 = V2;
+    return P1->ID - P2->ID;
 }
 
 void Organiza_Index(Ponto* P, int Contagem){
     qsort(P, Contagem, sizeof(Ponto), Compara_Index);
 }
 
-void Imprime(char Arquivo, Ponto* P, int Contagem){
+void Imprime(char* Arquivo, Ponto* P, int Contagem){
     FILE* Saida = fopen(Arquivo, "w");
     Organiza_Index(P, Contagem);
     for(int i = 0; i < Contagem; i++){
-        if(P[i+1] != NULL){
+        if(P[i+1].Nome != NULL){
             if(P[i].ID != P[i+1].ID){
                 fprintf(Saida,"%s","\n");
             }
