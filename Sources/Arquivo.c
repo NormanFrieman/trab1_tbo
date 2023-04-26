@@ -69,6 +69,7 @@ Entrada* Ler(char* Arquivo) {
     info->Contagem = Contagem;
     info->P = P;
     info->D = D;
+    Organiza_Distancia(info->D, DistQuantOld);
 
     fclose(input);
     free(tok);

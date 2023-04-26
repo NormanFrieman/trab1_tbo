@@ -33,7 +33,7 @@ int Compara_Distancia(const void* V1, const void* V2) {
 }
 
 void Organiza_Distancia(Distancia* D, int N) {
-    qsort(D, N - 1, sizeof(Distancia), Compara_Distancia);
+    qsort(D, N, sizeof(Distancia), Compara_Distancia);
 }
 
 void Imprime_Distancias(Distancia* D, Ponto* P, int N) {
