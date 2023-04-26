@@ -6,6 +6,7 @@ typedef struct {
     char* Nome;
     int* Coordenadas;
     int Tamanho_Cord;
+    int Tamanho;
 } Ponto;
 
 char* Retorna_Nome(Ponto* P);
@@ -24,7 +25,11 @@ void Imprime_Pontos(Ponto* P, int Contagem, int Dimensao);
 
 void Imprime_Unico(Ponto* P, int Dimensao);
 
+int Procura(int Id, Ponto* P);
+
 void Connecta(Ponto* P1, Ponto* P2);
+
+void Uniao(Ponto* P1, Ponto* P2, Ponto* P);
 
 void Libera_Ponto(Ponto* P, int Contagem);
 

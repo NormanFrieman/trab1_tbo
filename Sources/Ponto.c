@@ -18,6 +18,7 @@ Ponto* Inicia_Ponto(int N) {
 
 void Inicia_Unico(Ponto* P, char* Nome, int* Coordenadas, int Dimensao, int ID) {
     P->ID = ID;
+    P->Tamanho = 1;
     P->Nome = strdup(Nome);
     P->Coordenadas = Coordenadas;
     P->Tamanho_Cord = Dimensao;
@@ -48,9 +49,30 @@ void Imprime_Unico(Ponto* P, int Dimensao) {
     printf("\n");
 }
 
-void Connecta(Ponto* P1, Ponto* P2){
-    if(P1->ID != P2->ID){
-        P2->ID = P1->ID;
+int Procura(int Id, Ponto* P){
+    while(Id != P[Id].ID){
+        P[Id].ID = P[P[Id].ID].ID;
+        Id = P[Id].ID;
+    }
+    return Id;
+}
+
+int Connectado(Ponto* P1, Ponto* P2, Ponto* P){
+    return Procura(P1->ID, P) == Procura(P2->ID, P);
+}
+
+void Uniao(Ponto* P1, Ponto* P2, Ponto* P){
+    int Raiz1 = Procura(P1->ID, P);
+    int Raiz2 = Procura(P2->ID, P);
+    if(Raiz1 == Raiz2){
+        return;
+    }
+    if(P[Raiz1].Tamanho < P[Raiz2].Tamanho){
+        P[Raiz1].ID = Raiz2;
+        P[Raiz2].Tamanho += P[Raiz1].Tamanho;
+    }else{
+        P[Raiz2].ID = Raiz1;
+        P[Raiz1].Tamanho += P[Raiz2].Tamanho;
     }
 }
 
@@ -66,14 +88,15 @@ void Organiza_Index(Ponto* P, int Contagem){
 
 void Imprime(char* Arquivo, Ponto* P, int Contagem){
     FILE* Saida = fopen(Arquivo, "w");
-    Organiza_Index(P, Contagem);
     for(int i = 0; i < Contagem; i++){
-        if(P[i+1].Nome != NULL){
-            if(P[i].ID != P[i+1].ID){
-                fprintf(Saida,"%s","\n");
+        if(P[i].ID == i){
+            for(int j = i + 1; j < Contagem; j++){
+                if(P[j].ID == i){
+                   fprintf(Saida,"%s ",P[i].Nome); 
+                }
             }
         }
-        fprintf(Saida,"%s ",P[i].Nome);
+        fprintf(Saida,"%s ","\n");
     }
     fclose(Saida);
 }
