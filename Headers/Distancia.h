@@ -24,6 +24,8 @@ float Calcula_Distancia(int* P1, int* P2, int D);
 
 int Compara_Distancia(const void* V1, const void* V2);
 
+void Une(Distancia* D, Ponto* P, int Contagem, int k);
+
 void Organiza_Distancia(Distancia* D, int N);
 
 void Imprime_Distancias(Distancia* D, Ponto* P, int N);

@@ -3,6 +3,7 @@
 
 typedef struct {
     int ID;
+    int Posicao;
     char* Nome;
     int* Coordenadas;
     int Tamanho_Cord;
@@ -30,6 +31,10 @@ int Procura(int Id, Ponto* P);
 void Connecta(Ponto* P1, Ponto* P2);
 
 void Uniao(Ponto* P1, Ponto* P2, Ponto* P);
+
+void Procura_Ramo(int N, int I, int Index, int Tamanho,  Ponto* P, FILE* Saida);
+
+void Imprime(char* Arquivo, Ponto* P, int Contagem);
 
 void Libera_Ponto(Ponto* P, int Contagem);
 

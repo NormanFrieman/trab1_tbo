@@ -78,3 +78,4 @@ Entrada* Ler(char* Arquivo) {
     return info;
 }
 
+

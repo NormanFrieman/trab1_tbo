@@ -36,6 +36,12 @@ void Organiza_Distancia(Distancia* D, int N) {
     qsort(D, N, sizeof(Distancia), Compara_Distancia);
 }
 
+void Une(Distancia* D, Ponto* P, int Contagem, int k){
+    for(int i = 0; i < Contagem - k - 1; i++){
+        Uniao(&P[D[i].indexP1], &P[D[i].indexP2], P);
+    }   
+}
+
 void Imprime_Distancias(Distancia* D, Ponto* P, int N) {
     for (int i = 0; i < N - 1; i++) {
         printf("[Ponto %s -> Ponto %s] Distancia: %.2f\n", P[D[i].indexP1].Nome, P[D[i].indexP2].Nome, D[i].Distancia);
