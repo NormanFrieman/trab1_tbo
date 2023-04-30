@@ -37,7 +37,7 @@ void Organiza_Distancia(Distancia* D, int N) {
 }
 
 void Une(Distancia* D, Ponto* P, int Contagem, int k){
-    for(int i = 0; i < Contagem - k - 1; i++){
+    for(int i = 0; i < Contagem*10; i++){
         Uniao(&P[D[i].indexP1], &P[D[i].indexP2], P);
     }   
 }
