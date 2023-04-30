@@ -17,7 +17,7 @@ void Adiciona_Distancia(Distancia* D, Ponto *P, int indexP1, int indexP2) {
     D->Distancia = Calcula_Distancia(P[indexP1].Coordenadas, P[indexP2].Coordenadas, P[indexP1].Tamanho_Cord);
 }
 
-float Calcula_Distancia(int* P1, int* P2, int D) {
+float Calcula_Distancia(float* P1, float* P2, int D) {
     float Soma = 0;
     for (int i = 0; i < D; i++) {
         Soma += pow(P2[i] - P1[i],2);
@@ -43,19 +43,12 @@ void Organiza_Distancia(Distancia* D, int N) {
 //         Uniao(&P[D[i].indexP1], &P[D[i].indexP2], P);
 //     }   
 void Kruskel(Distancia* D, Ponto* P, int Contagem, int k) {
-    printf("%d\n", Contagem - k - 1);
-    for (int i = 0; i < Contagem - k - 1; i++) {
-        printf("[%s -> %s]: %.2f\n", P[D[i].indexP1].Nome, P[D[i].indexP2].Nome, D[i].Distancia);
-        printf("Conectado: %d\n", Connectado(&P[D[i].indexP1], &P[D[i].indexP2], P));
+    int Conexoes = 0;
+    
+    for (int i = 0; i < Contagem && Conexoes < Contagem - k - 1; i++) {
         if (!Connectado(&P[D[i].indexP1], &P[D[i].indexP2], P)) {
             Uniao(&P[D[i].indexP1], &P[D[i].indexP2], P);
+            Conexoes++;
         }
     }
-}
-
-void Imprime_Distancias(Distancia* D, Ponto* P, int N) {
-    for (int i = 0; i < N - 1; i++) {
-        printf("[Ponto %s -> Ponto %s] Distancia: %.2f\n", P[D[i].indexP1].Nome, P[D[i].indexP2].Nome, D[i].Distancia);
-    }
-    printf("\n");
 }

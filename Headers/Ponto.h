@@ -5,18 +5,19 @@ typedef struct {
     int ID;
     int PontoPai;
     char* Nome;
-    int* Coordenadas;
+    float* Coordenadas;
     int Tamanho_Cord;
     int Tamanho;
+    int Exibido;
 } Ponto;
 
 Ponto* Inicia_Ponto(int N);
 
-void Inicia_Unico(Ponto* P, char* Nome, int* Coordenadas, int Dimensao, int ID);
+void Inicia_Unico(Ponto* P, char* Nome, float* Coordenadas, int Dimensao, int ID);
 
 Ponto* Realloca_Ponto(Ponto* P, int N);
 
-int Procura(int Id, Ponto* P);
+int Procura(int PontoPaiP1, Ponto* P);
 
 int Connectado(Ponto* P1, Ponto* P2, Ponto* P);
 

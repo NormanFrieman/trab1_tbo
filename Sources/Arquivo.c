@@ -25,7 +25,7 @@ Entrada* Ler(char* Arquivo) {
     int DistQuantOld = 0;
     int Contagem = 0;
     char* Nome;
-    int* Coordenadas;
+    float* Coordenadas;
     char* tok;
     
     Ponto* P = Inicia_Ponto(1);
@@ -35,7 +35,7 @@ Entrada* Ler(char* Arquivo) {
         if (Dimensao == -1) {
             Dimensao = Contar_Dimemsao(strdup(Linha));
         }
-        Coordenadas = (int*)malloc(Dimensao * sizeof(int));
+        Coordenadas = (float*)malloc(Dimensao * sizeof(float));
 
         int i;
         for(tok = strtok(Linha, ","), i = 0; tok && *tok; tok = strtok(NULL, ",\n"), i++) {
