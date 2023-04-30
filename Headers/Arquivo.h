@@ -12,6 +12,7 @@ typedef struct {
     int Contagem;
     Ponto* P;
     Distancia* D;
+    int QuantD;
 } Entrada;
 
 int Contar_Dimemsao(char* Linha);
