@@ -8,13 +8,14 @@ Ponto* Inicia_Ponto(int N) {
     return P;
 }
 
-void Inicia_Unico(Ponto* P, char* Nome, int* Coordenadas, int Dimensao, int ID) {
+void Inicia_Unico(Ponto* P, char* Nome, float* Coordenadas, int Dimensao, int ID) {
     P->ID = ID;
     P->PontoPai = ID;
     P->Tamanho = 1;
     P->Nome = strdup(Nome);
     P->Coordenadas = Coordenadas;
     P->Tamanho_Cord = Dimensao;
+    P->Exibido = 0;
 }
 
 Ponto* Realloca_Ponto(Ponto* P, int N) {
@@ -22,12 +23,12 @@ Ponto* Realloca_Ponto(Ponto* P, int N) {
     return NovoP;
 }
 
-int Procura(int Id, Ponto* P){
-    while(Id != P[Id].PontoPai){
-        P[Id].PontoPai = P[P[Id].PontoPai].PontoPai;
-        Id = P[Id].PontoPai;
+int Procura(int PontoPaiP1, Ponto* P){
+    while(PontoPaiP1 != P[PontoPaiP1].PontoPai){
+        P[PontoPaiP1].PontoPai = P[P[PontoPaiP1].PontoPai].PontoPai;
+        PontoPaiP1 = P[PontoPaiP1].PontoPai;
     }
-    return Id;
+    return PontoPaiP1;
 }
 
 int Connectado(Ponto* P1, Ponto* P2, Ponto* P) {
@@ -35,15 +36,9 @@ int Connectado(Ponto* P1, Ponto* P2, Ponto* P) {
 }
 
 void Uniao(Ponto* P1, Ponto* P2, Ponto* P) {
-    printf("ANTES\n");
-    printf("[P1] Nome: %s, ID: %d, PontoPai: %d, Tamanho: %d\n", P1->Nome, P1->ID, P1->PontoPai, P1->Tamanho);
-    printf("[P2] Nome: %s, ID: %d, PontoPai: %d, Tamanho: %d\n", P2->Nome, P2->ID, P2->PontoPai, P2->Tamanho);
-    printf("\n");
     int Raiz1 = Procura(P1->PontoPai, P);
     int Raiz2 = Procura(P2->PontoPai, P);
-    if(Raiz1 == Raiz2){
-        return;
-    }
+    
     if (P[Raiz1].Tamanho < P[Raiz2].Tamanho) {
         P[Raiz1].PontoPai = Raiz2;
         P[Raiz2].Tamanho += P[Raiz1].Tamanho;
@@ -51,11 +46,6 @@ void Uniao(Ponto* P1, Ponto* P2, Ponto* P) {
         P[Raiz2].PontoPai = Raiz1;
         P[Raiz1].Tamanho += P[Raiz2].Tamanho;
     }
-
-    printf("DEPOIS\n");
-    printf("[P1] Nome: %s, ID: %d, PontoPai: %d, Tamanho: %d\n", P1->Nome, P1->ID, P1->PontoPai, P1->Tamanho);
-    printf("[P2] Nome: %s, ID: %d, PontoPai: %d, Tamanho: %d\n", P2->Nome, P2->ID, P2->PontoPai, P2->Tamanho);
-    printf("\n");
 }
 
 void Procura_Ramo(int N, int I, int Index, int Tamanho,  Ponto* P, FILE* Saida){
@@ -76,8 +66,28 @@ void Procura_Ramo(int N, int I, int Index, int Tamanho,  Ponto* P, FILE* Saida){
 
 void Imprime(char* Arquivo, Ponto* P, int Contagem){
     FILE* Saida = fopen(Arquivo, "w");
-    for(int i = 0; i < Contagem; i++){
-        Procura_Ramo(Contagem, i, P[i].ID, P[i].Tamanho, P, Saida);
+    for (int i = 0; i < Contagem; i++) {
+        int PontoPaiI = Procura(P[i].PontoPai, P);
+        int exibiuPontos = 0;
+        
+        for (int j = 0; j < Contagem; j++) {
+            int PontoPaiJ = Procura(P[j].PontoPai, P);
+            
+            if (PontoPaiI == PontoPaiJ && !P[j].Exibido) {
+                P[j].Exibido = 1;
+
+                if (!exibiuPontos) {
+                    fprintf(Saida, "%s", P[j].Nome);
+                    exibiuPontos = 1;
+                } else {
+                    fprintf(Saida, ",%s", P[j].Nome);
+                }
+            }
+
+            if (exibiuPontos != 0 && j + 1 >= Contagem) {
+                fprintf(Saida, "\n");
+            }
+        }
     }
     fclose(Saida);
 }
