@@ -42,7 +42,7 @@ void Organiza_Distancia(Distancia* D, int N) {
 //     for(int i = 0; i < Contagem*10; i++){
 //         Uniao(&P[D[i].indexP1], &P[D[i].indexP2], P);
 //     }   
-void Kruskel(Distancia* D, Ponto* P, int Contagem, int k) {
+void Kruskel(Distancia* D, Ponto* P, int Contagem, int k, int Arestas) {
     printf("%d\n", Contagem - k - 1);
     for (int i = 0; i < Contagem - k - 1; i++) {
         printf("[%s -> %s]: %.2f\n", P[D[i].indexP1].Nome, P[D[i].indexP2].Nome, D[i].Distancia);
