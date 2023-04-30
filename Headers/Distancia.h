@@ -11,7 +11,7 @@
 typedef struct {
     int indexP1;
     int indexP2;
-    float Distancia;
+    double Distancia;
 } Distancia;
 
 Distancia* Realloca_Distancia(Distancia* D, int N);
@@ -20,12 +20,14 @@ Distancia* Inicia_Distacias(int N);
 
 void Adiciona_Distancia(Distancia* D, Ponto *P, int indexP1, int indexP2);
 
-float Calcula_Distancia(float* P1, float* P2, int D);
+double Calcula_Distancia(double* P1, double* P2, int D);
 
 int Compara_Distancia(const void* V1, const void* V2);
 
-void Kruskel(Distancia* D, Ponto* P, int Contagem, int k);
+void Kruskel(Distancia* D, Ponto* P, int QuantD, int Contagem, int k);
 
 void Organiza_Distancia(Distancia* D, int N);
+
+void Imprime_Distancias(Distancia* D, Ponto* P, int N);
 
 #endif /*DISTANCIA_H_*/

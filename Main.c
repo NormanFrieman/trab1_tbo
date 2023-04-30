@@ -4,7 +4,7 @@
 int main(int argc, char* argv[]){
     Entrada* info = Ler(argv[1]);
 
-    Kruskel(info->D, info->P, info->Contagem, atoi(argv[2]));
+    Kruskel(info->D, info->P, info->QuantD, info->Contagem, atoi(argv[2]));
 
     Imprime(argv[3], info->P, info->Contagem);
 

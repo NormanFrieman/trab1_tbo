@@ -8,7 +8,7 @@ Ponto* Inicia_Ponto(int N) {
     return P;
 }
 
-void Inicia_Unico(Ponto* P, char* Nome, float* Coordenadas, int Dimensao, int ID) {
+void Inicia_Unico(Ponto* P, char* Nome, double* Coordenadas, int Dimensao, int ID) {
     P->ID = ID;
     P->PontoPai = ID;
     P->Tamanho = 1;
@@ -31,7 +31,7 @@ int Procura(int PontoPaiP1, Ponto* P){
     return PontoPaiP1;
 }
 
-int Connectado(Ponto* P1, Ponto* P2, Ponto* P) {
+int Conectado(Ponto* P1, Ponto* P2, Ponto* P) {
     return Procura(P1->PontoPai, P) == Procura(P2->PontoPai, P);
 }
 
@@ -48,27 +48,11 @@ void Uniao(Ponto* P1, Ponto* P2, Ponto* P) {
     }
 }
 
-void Procura_Ramo(int N, int I, int Index, int Tamanho,  Ponto* P, FILE* Saida){
-    int Cont = 0;
-    for(int i = I; i < N; i++){
-        if(P[i].PontoPai == Index){
-            fprintf(Saida, "%s,", P[i].Nome);
-            Procura_Ramo(N, i + 1, P[i].ID, P[i].Tamanho, P, Saida);
-            Cont++;
-            
-            if(Cont == Tamanho){
-                fprintf(Saida, "\n");
-                return;
-            } 
-        }
-    }
-}
-
 void Imprime(char* Arquivo, Ponto* P, int Contagem){
     FILE* Saida = fopen(Arquivo, "w");
     for (int i = 0; i < Contagem; i++) {
         int PontoPaiI = Procura(P[i].PontoPai, P);
-        int exibiuPontos = 0;
+        int ExibiuPontos = 0;
         
         for (int j = 0; j < Contagem; j++) {
             int PontoPaiJ = Procura(P[j].PontoPai, P);
@@ -76,15 +60,15 @@ void Imprime(char* Arquivo, Ponto* P, int Contagem){
             if (PontoPaiI == PontoPaiJ && !P[j].Exibido) {
                 P[j].Exibido = 1;
 
-                if (!exibiuPontos) {
+                if (!ExibiuPontos) {
                     fprintf(Saida, "%s", P[j].Nome);
-                    exibiuPontos = 1;
+                    ExibiuPontos = 1;
                 } else {
                     fprintf(Saida, ",%s", P[j].Nome);
                 }
             }
 
-            if (exibiuPontos != 0 && j + 1 >= Contagem) {
+            if (ExibiuPontos != 0 && j + 1 >= Contagem) {
                 fprintf(Saida, "\n");
             }
         }
