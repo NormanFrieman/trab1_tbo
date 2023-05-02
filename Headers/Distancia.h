@@ -24,8 +24,11 @@ double Calcula_Distancia(double* P1, double* P2, int D);
 
 int Compara_Distancia(const void* V1, const void* V2);
 
-void Kruskel(Distancia* D, Ponto* P, int Contagem, int k, int Arestas);
+
+void Kruskel(Distancia* D, Ponto* P, int QuantD, int Contagem, int k);
 
 void Organiza_Distancia(Distancia* D, int N);
+
+void Imprime_Distancias(Distancia* D, Ponto* P, int N);
 
 #endif /*DISTANCIA_H_*/

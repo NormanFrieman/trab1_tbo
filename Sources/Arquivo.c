@@ -25,9 +25,10 @@ Entrada* Ler(char* Arquivo) {
     int DistQuantOld = 0;
     int Contagem = 0;
     char* Nome;
-    float* Coordenadas;
+    double* Coordenadas;
     char* tok;
-    
+    char *eptr;
+
     Ponto* P = Inicia_Ponto(1);
     Distancia* D = Inicia_Distacias(1);
     
@@ -35,14 +36,14 @@ Entrada* Ler(char* Arquivo) {
         if (Dimensao == -1) {
             Dimensao = Contar_Dimemsao(strdup(Linha));
         }
-        Coordenadas = (float*)malloc(Dimensao * sizeof(float));
+        Coordenadas = (double*)malloc(Dimensao * sizeof(double));
 
         int i;
         for(tok = strtok(Linha, ","), i = 0; tok && *tok; tok = strtok(NULL, ",\n"), i++) {
             if (i == 0) {
                 Nome = strdup(tok);
             } else {
-                Coordenadas[i-1] = atoi(tok);
+                Coordenadas[i-1] = strtod(tok, &eptr);
             }
         }
         

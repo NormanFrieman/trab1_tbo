@@ -5,9 +5,8 @@ int main(int argc, char* argv[]){
     Entrada* info = Ler(argv[1]);
 
 
-    Imprime_Distancias(info->D, info->P, info->QuantD);
+    Kruskel(info->D, info->P, info->QuantD, info->Contagem, atoi(argv[2]));
 
-    Kruskel(info->D, info->P, info->Contagem, atoi(argv[2]), info->QuantD);
 
     Imprime(argv[3], info->P, info->Contagem);
 

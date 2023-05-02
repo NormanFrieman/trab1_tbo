@@ -19,7 +19,7 @@ Ponto* Realloca_Ponto(Ponto* P, int N);
 
 int Procura(int PontoPaiP1, Ponto* P);
 
-int Connectado(Ponto* P1, Ponto* P2, Ponto* P);
+int Conectado(Ponto* P1, Ponto* P2, Ponto* P);
 
 void Uniao(Ponto* P1, Ponto* P2, Ponto* P);
 

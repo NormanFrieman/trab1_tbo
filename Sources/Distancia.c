@@ -37,17 +37,15 @@ void Organiza_Distancia(Distancia* D, int N) {
     qsort(D, N, sizeof(Distancia), Compara_Distancia);
 }
 
-// <<<<<<< HEAD
-// void Une(Distancia* D, Ponto* P, int Contagem, int k){
-//     for(int i = 0; i < Contagem*10; i++){
-//         Uniao(&P[D[i].indexP1], &P[D[i].indexP2], P);
-//     }   
 
-void Kruskel(Distancia* D, Ponto* P, int Contagem, int k, int Arestas) {
+void Kruskel(Distancia* D, Ponto* P, int QuantD, int Contagem, int k) {
     int Conexoes = 0;
-    
-    for (int i = 0; i < Arestas && Conexoes < Arestas - k - 1; i++) {
-        if (!Connectado(&P[D[i].indexP1], &P[D[i].indexP2], P)) {
+
+    for (int i = 0; i < QuantD && Conexoes <= Contagem - k - 1; i++) {
+        int conectado = Conectado(&P[D[i].indexP1], &P[D[i].indexP2], P);
+
+        if (!conectado) {
+
             Uniao(&P[D[i].indexP1], &P[D[i].indexP2], P);
             Conexoes++;
         }
