@@ -45,7 +45,6 @@ void Kruskel(Distancia* D, Ponto* P, int QuantD, int Contagem, int k) {
 
         if (!conectado) {
             Uniao(&P[D[i].indexP1], &P[D[i].indexP2], P);
-            D[i].Conectado = 1;
             Conexoes++;
         }
     }
