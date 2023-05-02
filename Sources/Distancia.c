@@ -10,11 +10,28 @@ Distancia* Realloca_Distancia(Distancia* D, int N) {
     return D;
 }
 
-void Adiciona_Distancia(Distancia* D, Ponto *P, int indexP1, int indexP2) {
+void Adiciona_Distancia(Distancia* D, Ponto *P, int indexP1, int indexP2, int Dimensao) {
     D->indexP1 = indexP1;
     D->indexP2 = indexP2;
 
-    D->Distancia = Calcula_Distancia(P[indexP1].Coordenadas, P[indexP2].Coordenadas, P[indexP1].Tamanho_Cord);
+    D->Distancia = Calcula_Distancia(P[indexP1].Coordenadas, P[indexP2].Coordenadas, Dimensao);
+}
+
+Distancia* Calcula_Distancias(Ponto* P, int Contagem, int Dimensao) {
+    int auxD = 0;
+    int QuantD = (Contagem * (Contagem - 1))/ 2;
+
+    Distancia* D = Inicia_Distacias(QuantD);
+
+    for (int i = 1; i < Contagem; i++) {
+        for (int j = 0; j < i; j++) {
+            Adiciona_Distancia(&D[auxD], P, j, i, Dimensao);
+            auxD++;
+        }
+    }
+
+    Organiza_Distancia(D, QuantD);
+    return D;
 }
 
 double Calcula_Distancia(double* P1, double* P2, int D) {

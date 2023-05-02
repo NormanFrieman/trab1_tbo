@@ -17,6 +17,17 @@ int main(int argc, char* argv[]){
 
     start = clock();
 
+    info->D = Calcula_Distancias(info->P, info->Contagem, info->Dimensao);
+
+    stop = clock();
+
+    time_taken = ((double) stop - start) / CLOCKS_PER_SEC;
+    printf("Calcula_Distancias: %.3f\n", time_taken);
+
+    // ######################
+
+    start = clock();
+
     Kruskel(info->D, info->P, info->QuantD, info->Contagem, atoi(argv[2]));
 
     stop = clock();

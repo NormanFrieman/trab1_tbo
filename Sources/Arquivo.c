@@ -21,8 +21,6 @@ Entrada* Ler(char* Arquivo) {
     Linha = (char*)malloc(T * sizeof(char));
     
     int Dimensao = -1;
-    int DistQuant = 0;
-    int DistQuantOld = 0;
     int Contagem = 0;
     char* Nome;
     double* Coordenadas;
@@ -30,7 +28,6 @@ Entrada* Ler(char* Arquivo) {
     char *eptr;
 
     Ponto* P = Inicia_Ponto(1);
-    Distancia* D = Inicia_Distacias(1);
     
     while (getline(&Linha, &T, input) != -1) {
         if (Dimensao == -1) {
@@ -47,31 +44,20 @@ Entrada* Ler(char* Arquivo) {
             }
         }
         
-        Inicia_Unico(&P[Contagem], Nome, Coordenadas, Dimensao, Contagem);
+        Inicia_Unico(&P[Contagem], Nome, Coordenadas, Contagem);
         free(Nome);
 
-        if (Contagem > 0) {
-            for (int j = 0; j < Contagem; j++, DistQuantOld++) {
-                Adiciona_Distancia(&D[DistQuantOld], P, j, Contagem);
-            }
-        }
 
         Contagem++;
 
-        // Soma-se +1 na variável Contagem pois o número de pontos é igual ao número de linhas do arquivo + 1
-        DistQuant = (((Contagem+1) * ((Contagem+1) - 1))/ 2) + 1;
-
         P = Realloca_Ponto(P, Contagem + 1);
-        D = Realloca_Distancia(D, DistQuant + 1);
     }
     
     Entrada* info = (Entrada*)malloc(sizeof(Entrada));
     info->Dimensao = Dimensao;
     info->Contagem = Contagem;
     info->P = P;
-    info->D = D;
-    info->QuantD = DistQuantOld;
-    Organiza_Distancia(info->D, DistQuantOld);
+    info->QuantD = (Contagem * (Contagem - 1))/ 2;
 
     fclose(input);
     free(tok);
