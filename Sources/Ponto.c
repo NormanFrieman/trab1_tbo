@@ -8,13 +8,12 @@ Ponto* Inicia_Ponto(int N) {
     return P;
 }
 
-void Inicia_Unico(Ponto* P, char* Nome, double* Coordenadas, int Dimensao, int ID) {
+void Inicia_Unico(Ponto* P, char* Nome, double* Coordenadas, int ID) {
     P->ID = ID;
     P->PontoPai = ID;
     P->Tamanho = 1;
     P->Nome = strdup(Nome);
     P->Coordenadas = Coordenadas;
-    P->Tamanho_Cord = Dimensao;
     P->Exibido = 0;
 }
 

@@ -6,14 +6,13 @@ typedef struct {
     int PontoPai;
     char* Nome;
     double* Coordenadas;
-    int Tamanho_Cord;
     int Tamanho;
     int Exibido;
 } Ponto;
 
 Ponto* Inicia_Ponto(int N);
 
-void Inicia_Unico(Ponto* P, char* Nome, double* Coordenadas, int Dimensao, int ID);
+void Inicia_Unico(Ponto* P, char* Nome, double* Coordenadas, int ID);
 
 Ponto* Realloca_Ponto(Ponto* P, int N);
 
