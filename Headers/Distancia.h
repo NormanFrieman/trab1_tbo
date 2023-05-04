@@ -14,8 +14,6 @@ typedef struct {
     double Distancia;
 } Distancia;
 
-Distancia* Realloca_Distancia(Distancia* D, int N);
-
 Distancia* Inicia_Distacias(int N);
 
 void Adiciona_Distancia(Distancia* D, Ponto *P, int indexP1, int indexP2, int Dimensao);

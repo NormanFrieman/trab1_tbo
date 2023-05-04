@@ -5,11 +5,6 @@ Distancia* Inicia_Distacias(int N) {
     return D;
 }
 
-Distancia* Realloca_Distancia(Distancia* D, int N) {
-    D = (Distancia*)realloc(D, N * sizeof(Distancia));
-    return D;
-}
-
 void Adiciona_Distancia(Distancia* D, Ponto *P, int indexP1, int indexP2, int Dimensao) {
     D->indexP1 = indexP1;
     D->indexP2 = indexP2;
@@ -30,7 +25,6 @@ Distancia* Calcula_Distancias(Ponto* P, int Contagem, int Dimensao) {
         }
     }
 
-    Organiza_Distancia(D, QuantD);
     return D;
 }
 
@@ -38,7 +32,6 @@ double Calcula_Distancia(double* P1, double* P2, int D) {
     double Soma = 0;
     for (int i = 0; i < D; i++) {
         Soma += pow(P2[i] - P1[i],2);
-        // Soma += (pow(P1[i],2) + pow(P2[i],2));
     }
     
     return sqrt(Soma);
@@ -47,7 +40,7 @@ double Calcula_Distancia(double* P1, double* P2, int D) {
 int Compara_Distancia(const void* V1, const void* V2) {
     const Distancia* D1 = V1;
     const Distancia* D2 = V2;
-    return D1->Distancia*100 - D2->Distancia*100;
+    return D1->Distancia - D2->Distancia;
 }
 
 void Organiza_Distancia(Distancia* D, int N) {

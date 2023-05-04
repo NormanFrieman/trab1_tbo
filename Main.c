@@ -32,6 +32,17 @@ int main(int argc, char* argv[]){
 
     start = clock();
 
+    // Organiza as distância em ordem crescente
+    Organiza_Distancia(info->D, info->QuantD);
+
+    stop = clock();
+
+    exibirTempo("Organiza_Distancia", start, stop);
+
+    ///////////////////////////////////
+
+    start = clock();
+
     // Realiza o algoritmo de kruskel
     Kruskel(info->D, info->P, info->QuantD, info->Contagem, atoi(argv[2]));
 

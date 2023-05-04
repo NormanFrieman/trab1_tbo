@@ -38,7 +38,7 @@ void Uniao(Ponto* P1, Ponto* P2, Ponto* P) {
     int Raiz1 = Procura(P1->PontoPai, P);
     int Raiz2 = Procura(P2->PontoPai, P);
     
-    if (P[Raiz1].Tamanho < P[Raiz2].Tamanho) {
+    if (P[Raiz1].Tamanho > P[Raiz2].Tamanho) {
         P[Raiz1].PontoPai = Raiz2;
         P[Raiz2].Tamanho += P[Raiz1].Tamanho;
     } else {
