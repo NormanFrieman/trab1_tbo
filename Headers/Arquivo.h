@@ -19,4 +19,6 @@ int Contar_Dimemsao(char* Linha);
 
 Entrada* Ler(char* Arquivo);
 
+void Imprime(char* Arquivo, Ponto* P, int Contagem);
+
 #endif /*ARQUIVO_H_*/

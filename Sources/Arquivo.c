@@ -65,3 +65,31 @@ Entrada* Ler(char* Arquivo) {
 
     return info;
 }
+
+void Imprime(char* Arquivo, Ponto* P, int Contagem){
+    FILE* Saida = fopen(Arquivo, "w");
+    for (int i = 0; i < Contagem; i++) {
+        int PontoPaiI = *(Procura(P[i].PontoPai, P));
+        int ExibiuPontos = 0;
+
+        for (int j = 0; j < Contagem; j++) {
+            int PontoPaiJ = *(Procura(P[j].PontoPai, P));
+
+            if (PontoPaiI == PontoPaiJ && !P[j].Exibido) {
+                P[j].Exibido = 1;
+
+                if (!ExibiuPontos) {
+                    fprintf(Saida, "%s", P[j].Nome);
+                    ExibiuPontos = 1;
+                } else {
+                    fprintf(Saida, ",%s", P[j].Nome);
+                }
+            }
+
+            if (ExibiuPontos != 0 && j + 1 >= Contagem) {
+                fprintf(Saida, "\n");
+            }
+        }
+    }
+    fclose(Saida);
+}

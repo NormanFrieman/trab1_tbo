@@ -28,8 +28,6 @@ int Compara_Ponto(const void* V1, const void* V2);
 
 void Organiza_Ponto(Ponto* P, int N);
 
-void Imprime(char* Arquivo, Ponto* P, int Contagem);
-
 void Libera_Ponto(Ponto* P, int Contagem);
 
 #endif /*PONTO_H_*/
