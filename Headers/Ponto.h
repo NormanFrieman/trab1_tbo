@@ -2,8 +2,8 @@
 #define PONTO_H_
 
 typedef struct {
-    int ID;
-    int PontoPai;
+    int* ID;
+    int* PontoPai;
     char* Nome;
     double* Coordenadas;
     int Tamanho;
@@ -16,13 +16,17 @@ void Inicia_Unico(Ponto* P, char* Nome, double* Coordenadas, int ID);
 
 Ponto* Realloca_Ponto(Ponto* P, int N);
 
-int Procura(int PontoPaiP1, Ponto* P);
+int* Procura(int* PontoPaiP1, Ponto* P);
 
 int Conectado(Ponto* P1, Ponto* P2, Ponto* P);
 
 void Uniao(Ponto* P1, Ponto* P2, Ponto* P);
 
 void Procura_Ramo(int N, int I, int Index, int Tamanho,  Ponto* P, FILE* Saida);
+
+int Compara_Ponto(const void* V1, const void* V2);
+
+void Organiza_Ponto(Ponto* P, int N);
 
 void Imprime(char* Arquivo, Ponto* P, int Contagem);
 

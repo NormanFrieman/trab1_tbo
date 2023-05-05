@@ -51,6 +51,17 @@ int main(int argc, char* argv[]){
     exibirTempo("Kruskel", start, stop);
 
     ///////////////////////////////////
+
+    start = clock();
+
+    // Organiza os pontos por nome, em ordem crescente
+    Organiza_Ponto(info->P, info->Contagem);
+
+    stop = clock();
+
+    exibirTempo("Organiza_Ponto", start, stop);
+
+    ///////////////////////////////////
     
     start = clock();
     
